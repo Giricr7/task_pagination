@@ -21,9 +21,35 @@
   color: white;
 }
 
-.pagination table td:hover{
+.pagination table td:hover {
+  cursor: pointer;
+  background: #830707;
+  border-color: black;
+}
+.data table {
+  border: 3px solid;
+  width: 50%;
+  padding: 5%;
+}
 
-    cursor: pointer;
-    background: #830707;
-    border-color: black;
+.data {
+  width: 100%;
+  background: chartreuse;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#number,
+#email,
+#name {
+  text-decoration-style: dotted;
+  color: red;
+  text-align: right;
+  font-size: large;
+  border-color: black;
+}
+
+.data td {
+  border: 1px solid;
 }
