@@ -1,10 +1,9 @@
-setdata=  (page)=>{
-    
+setdata= async (page_num)=>{
 
 // fetching json data from given url
     let url = 'https://raw.githubusercontent.com/Rajavasanthan/jsondata/master/pagenation.json'
 
-    fetch(url)
+    await fetch(url)
     .then((data) => {
         return data.json();
     })
@@ -16,7 +15,7 @@ setdata=  (page)=>{
           
            
 
-            for (let i = 0; i < jsdata.length; i++){
+            for (let i = 0 ; i < page_num ; i++){
 
                 table = document.createElement('table');
                 
@@ -45,11 +44,9 @@ setdata=  (page)=>{
                 data_div = document.getElementById('display_data');
                 data_div.appendChild(table);
 
-                
+               
             }
 
-
- 
     })
 
 
@@ -69,37 +66,36 @@ var pag_row = pag_table.insertRow()
 
 for (let i = 1; i <= 14; i++){
     
-    if (i===1)
-    {
+    if (i === 1) {
         let cell = pag_row.insertCell();
         cell.textContent = 'First'
         cell.setAttribute('id', 'first')
-        cell.setAttribute('class','paging_buttons')
+        cell.setAttribute('onclick',"setdata(1)")
     }
     if (i === 2) {
         let cell = pag_row.insertCell();
         cell.textContent = '<< Previous'
         cell.setAttribute('id', 'previous')
-        cell.setAttribute('class','paging_buttons')
+        cell.setAttribute('onclick',"setdata(2)")
     }
     if (i > 2 && i< 13) {
         let cell = pag_row.insertCell();
         cell.textContent = i - 2;
         cell.setAttribute('id', i - 2)
-        cell.setAttribute('class','paging_buttons')
+        cell.setAttribute('onclick',`setdata(${i})`)
     }
     if (i===13) {
         
         let cell = pag_row.insertCell();
         cell.textContent = 'Next >>'
         cell.setAttribute('id', 'next')
-        cell.setAttribute('class','paging_buttons')
+        cell.setAttribute('onclick',"setdata(13)")
     }
     if (i === 14) {
         let cell = pag_row.insertCell();
         cell.textContent = 'Last'
         cell.setAttribute('id', 'last')
-        cell.setAttribute('class','paging_buttons')
+        cell.setAttribute('onclick',"setdata(14)")
     }
 
 }
@@ -107,12 +103,12 @@ for (let i = 1; i <= 14; i++){
 
 //inserting the table to html
 
-let pag_div = document.getElementById('pag_div')
+var pag_div = document.getElementById('pag_div')
 
 pag_div.appendChild(pag_table)
 
-//writing eventlistener for all pagination buttons
-pag_numbers = pag_table.getElementsByClassName('paging_buttons');
 
 
-setdata();
+
+
+
