@@ -1,3 +1,5 @@
+var currentPage;
+
 
 displaydata = (page) => {
     data_div = document.getElementById('display_data');
@@ -21,6 +23,7 @@ return data.json();
    
     for (let i = (page * 10) - 10; i < page * 10; i++){
 
+        //creating and inserting the fetched data
         table = document.createElement('table');
         
         row_1 = table.insertRow();
@@ -48,20 +51,26 @@ return data.json();
         
         data_div.appendChild(table);
 
+        
        
     }
+    currentPage = page
+   
+    let cells=pag_div.getElementsByTagName('td')
+    for (i = 0; i < cells.length;i++)
+    {
+        cells[i].style.background='#e47474'
+    }
+    
+    document.getElementById(`${currentPage}`).style.background = 'green'
+   
 })
 }
  
     
     
-
-
+// sending the exact page which is to be fetched
     
-    
-
-
-
 setdata = async (page_num) => {
 
     var data_div = document.getElementById('display_data');
@@ -83,7 +92,27 @@ setdata = async (page_num) => {
         displaydata(10);
     }
 
+    if (page_num === 'previous')
+    {
+        if(currentPage>1)
+            displaydata(currentPage - 1)
+        else {
+            displaydata(1)
+           
+        }
+            
+    }
 
+    if (page_num === 'next')
+    {
+        if(currentPage<10)
+            displaydata(currentPage + 1)
+        else
+        {
+            displaydata(10)
+        }
+            
+    }
 
 }
 
@@ -92,7 +121,7 @@ setdata = async (page_num) => {
 
 //creating pagination outlook
 
-let pag_table = document.createElement('table');
+var pag_table = document.createElement('table');
 
 var pag_row = pag_table.insertRow()
 
@@ -139,7 +168,7 @@ var pag_div = document.getElementById('pag_div')
 
 pag_div.appendChild(pag_table)
 
-
+// on reloading set the page to display the 1st page as default
 if (location.reload) {
     setdata(1)
 }
