@@ -18,12 +18,12 @@ return data.json();
 .then((jsdata) => {
   
     heading = document.createElement('h1')
-    heading.innerHTML=`Page ${page}`
+    heading.innerHTML=`Employee Details-Page ${page}`
         data_div.appendChild(heading);
    
     for (let i = (page * 10) - 10; i < page * 10; i++){
 
-        //creating and inserting the fetched data
+        //creating table and inserting the fetched data 
         table = document.createElement('table');
         
         row_1 = table.insertRow();
@@ -51,12 +51,14 @@ return data.json();
         
         data_div.appendChild(table);
 
-        
+        br = document.createElement('br')
+        data_div.appendChild(br);
        
     }
     currentPage = page
    
-    let cells=pag_div.getElementsByTagName('td')
+  //highlighting the current page in pagination button
+    let cells = pag_div.getElementsByTagName('td')
     for (i = 0; i < cells.length;i++)
     {
         cells[i].style.background='#e47474'
